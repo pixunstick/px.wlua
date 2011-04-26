@@ -48,8 +48,6 @@ cr = iup.dialog{
   cv}
 
 local xoffset, yoffset
-local screen1x, screen1y = string.match(
-  iup.GetGlobal"MONITORSINFO", "^(%d*) (%d*)")
 function cv:button_cb(b, pressed, x, y)
   --if left or right clicked
   if b == iup.BUTTON3
@@ -69,8 +67,8 @@ end
 function cv:motion_cb(x, y, status)
   if iup.isbutton1(status) and not movelock then
     local sx, sy = string.match(
-      iup.GetGlobal"CURSORPOS", "(%d*)x(%d*)")
-    cr:showxy(sx-xoffset, sy-yoffset)
+      iup.GetGlobal"CURSORPOS", "^([%d%-]*)x([%d%-]*)$")
+    cr:popup(sx-xoffset, sy-yoffset)
   end
 end
 
