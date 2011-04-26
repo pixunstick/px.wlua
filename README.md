@@ -1,6 +1,10 @@
+# About
+
 This is a program designed to flash a color on and off rapidly. You can use this to attempt to unstick a pixel by flashing the stuck pixel for several hours (results not guaranteed).
 
 The flashing window (it's 5x5 pixels) can be dragged with the mouse.
+
+# Running
 
 To run px.wlua, you'll need:
 
@@ -10,3 +14,7 @@ To run px.wlua, you'll need:
 On Windows, you can get all this and more by installing [Lua for Windows](http://code.google.com/p/luaforwindows/downloads/detail?name=LuaForWindows_v5.1.4-40.exe).
 
 Outside of Windows, check your local package manager (which will most likely have packages for Lua) and/or Sourceforge (there are some good tips out there for setting up the IUP library files you can get from Sourceforge if you search for them).
+
+# Suggestions
+
+Propose new features using [the issue tracker on GitHub](https://github.com/stuartpb/necropx/issues).
