@@ -47,6 +47,9 @@ cr = iup.dialog{
   TRAYIMAGE = bp;
   cv}
 
+local xoffset, yoffset
+local screen1x, screen1y = string.match(
+  iup.GetGlobal"MONITORSINFO", "^(%d*) (%d*)")
 function cv:button_cb(b, pressed, x, y)
   --if left or right clicked
   if b == iup.BUTTON3
@@ -54,6 +57,8 @@ function cv:button_cb(b, pressed, x, y)
     cm:popup(iup.MOUSEPOS, iup.MOUSEPOS)
   elseif b == iup.BUTTON1 then
     if pressed == 1 then
+      xoffset = x
+      yoffset = y
       self.cursor="NONE"
     else
       self.cursor="CROSS"
@@ -61,10 +66,11 @@ function cv:button_cb(b, pressed, x, y)
   end
 end
 
-local movelock
 function cv:motion_cb(x, y, status)
   if iup.isbutton1(status) and not movelock then
-    cr:showxy(iup.MOUSEPOS, iup.MOUSEPOS)
+    local sx, sy = string.match(
+      iup.GetGlobal"CURSORPOS", "(%d*)x(%d*)")
+    cr:showxy(sx-xoffset, sy-yoffset)
   end
 end
 
