@@ -67,7 +67,7 @@ end
 function cv:motion_cb(x, y, status)
   if iup.isbutton1(status) and not movelock then
     local sx, sy = string.match(
-      iup.GetGlobal"CURSORPOS", "^([%d%-]*)x([%d%-]*)$")
+      iup.GetGlobal"CURSORPOS", "^(%-?%d*)x(%-?%d*)$")
     cr:popup(sx-xoffset, sy-yoffset)
   end
 end
