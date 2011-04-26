@@ -11,7 +11,8 @@ end
 local cv = iup.canvas{
   bgcolor="0 0 0",
   rastersize="5x5",
-  cursor="MOVE"}
+  cursor="CROSS",
+  border="NO"}
 
 local cm = iup.menu{
   iup.item{
@@ -55,7 +56,7 @@ function cv:button_cb(b, pressed, x, y)
     if pressed == 1 then
       self.cursor="NONE"
     else
-      self.cursor="MOVE"
+      self.cursor="CROSS"
     end
   end
 end
