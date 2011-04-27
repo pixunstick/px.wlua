@@ -4,6 +4,10 @@ This is a program designed to flash a color on and off rapidly. You can use this
 
 The flashing window (it's 5x5 pixels) can be dragged with the mouse.
 
+# History
+
+This program was mostly influenced by [UDPixel](http://udpix.free.fr/), created to address some of its shortcomings (specifically the missing tray icon when minimized).
+
 # Running
 
 To run px.wlua, you'll need:
@@ -18,3 +22,8 @@ Outside of Windows, check your local package manager (which will most likely hav
 # Suggestions
 
 Propose new features using [the issue tracker on GitHub](https://github.com/stuartpb/necropx/issues).
+
+# License
+
+This program is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) (the same license as [Lua itself](http://www.lua.org/license.html)).
+
