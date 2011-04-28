@@ -19,11 +19,13 @@ On Windows, you can get all this and more by installing [Lua for Windows](http:/
 
 Outside of Windows, check your local package manager (which will most likely have packages for Lua) and/or Sourceforge (there are some good tips out there for setting up the IUP library files you can get from Sourceforge if you search for them).
 
-# Suggestions
+# Contributing
 
-Propose new features using [the issue tracker on GitHub](https://github.com/stuartpb/necropx/issues).
+Source for this project is hosted on [GitHub](https://github.com/stuartpb/necropx). Submit merge requests there or email patches to stuart@testtrack4.com
+
+Report issues or suggest new features using [the issue tracker](https://github.com/stuartpb/necropx/issues).
 
 # License
 
-This program is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html) (the same license as [Lua itself](http://www.lua.org/license.html)).
+This program is distributed under the terms of the [MIT license](http://www.opensource.org/licenses/mit-license.html).
 
