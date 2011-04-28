@@ -76,6 +76,10 @@ cr = iup.dialog{
   TRAY="YES", TRAYIMAGE = bp;
   cv}
 
+local function settopleft(x, y)
+  cr:showxy(x, y)
+end
+
 local xoffset, yoffset
 function cv:button_cb(b, pressed, x, y)
   --if left or right clicked
@@ -94,10 +98,10 @@ function cv:button_cb(b, pressed, x, y)
 end
 
 function cv:motion_cb(x, y, status)
-  if iup.isbutton1(status) and not movelock then
+  if iup.isbutton1(status) then
     local sx, sy = string.match(
       iup.GetGlobal"CURSORPOS", "^(%-?%d*)x(%-?%d*)$")
-    cr:popup(sx-xoffset, sy-yoffset)
+    settopleft(sx-xoffset, sy-yoffset)
   end
 end
 
@@ -116,17 +120,16 @@ function cr:trayclick_cb(b, press, dclick)
 end
 
 function cv:keypress_cb(c, press)
-  local sx = string.match(
-      self.SCREENPOSITION, "^(%-?%d*)x(%-?%d*)$")
-  if press == 0 then
+  local sx, sy = cr.X, cr.Y
+  if press == 1 then
     if c == iup.K_UP then
-      cr:showxy(sx,sy-1)
+      settopleft(sx,sy-1)
     elseif c == iup.K_DOWN then
-      cr:showxy(sx,sy+1)
+      settopleft(sx,sy+1)
     elseif c == iup.K_LEFT then
-      cr:showxy(sx-1,sy)
+      settopleft(sx-1,sy)
     elseif c == iup.K_RIGHT then
-      cr:showxy(sx+1,sy)
+      settopleft(sx+1,sy)
     end
   end
   return iup.IGNORE
