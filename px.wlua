@@ -1,25 +1,3 @@
---[=======================================================================[--
-Copyright (c) 2011 Stuart P. Bentley
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
---]=======================================================================]--
-
 local iup = require "iuplua"
 
 local cr
@@ -34,7 +12,8 @@ local cv = iup.canvas{
   bgcolor="0 0 0",
   rastersize="5x5",
   cursor="CROSS",
-  border="NO"}
+  border="NO",
+}
 
 local cm = iup.menu{
   iup.item{
@@ -74,7 +53,7 @@ local bp = iup.image{width=16, height=16,
 
 local flicker = true
 
-local tr = iup.timer{time=25,run="yes",
+local tr = iup.timer{time=10,run="yes",
   action_cb=function(self)
     if flicker then
       cv.bgcolor="255 0 0"
@@ -90,10 +69,11 @@ local tr = iup.timer{time=25,run="yes",
 
 cr = iup.dialog{
   TOPMOST="YES",
-  BORDER="NO", MAXBOX="NO",
-  MINBOX="NO", MENUBOX="NO",
-  RESIZE="NO", TRAY="YES",
-  TRAYIMAGE = bp;
+  MAXBOX="NO", MINBOX="NO",
+  MENUBOX="NO",
+  RESIZE="NO",
+  BORDER="NO",
+  TRAY="YES", TRAYIMAGE = bp;
   cv}
 
 local xoffset, yoffset
@@ -117,7 +97,7 @@ function cv:motion_cb(x, y, status)
   if iup.isbutton1(status) and not movelock then
     local sx, sy = string.match(
       iup.GetGlobal"CURSORPOS", "^(%-?%d*)x(%-?%d*)$")
-    cr:showxy(sx-xoffset, sy-yoffset)
+    cr:popup(sx-xoffset, sy-yoffset)
   end
 end
 
@@ -133,6 +113,23 @@ function cr:trayclick_cb(b, press, dclick)
     cm:popup(iup.MOUSEPOS, iup.MOUSEPOS)
   end
   return iup.DEFAULT
+end
+
+function cv:keypress_cb(c, press)
+  local sx = string.match(
+      self.SCREENPOSITION, "^(%-?%d*)x(%-?%d*)$")
+  if press == 0 then
+    if c == iup.K_UP then
+      cr:showxy(sx,sy-1)
+    elseif c == iup.K_DOWN then
+      cr:showxy(sx,sy+1)
+    elseif c == iup.K_LEFT then
+      cr:showxy(sx-1,sy)
+    elseif c == iup.K_RIGHT then
+      cr:showxy(sx+1,sy)
+    end
+  end
+  return iup.IGNORE
 end
 
 cr:show()
